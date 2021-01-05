@@ -9,7 +9,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: "12.x"
-          registry-url: 'registry-url: "https://npm.pkg.github.com/yazilim-vip"'
+          registry-url: "https://npm.pkg.github.com/yazilim-vip"
       - run: |
           yarn install
           yarn build
