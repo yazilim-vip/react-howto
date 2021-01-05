@@ -2,7 +2,6 @@ import React, { FC, useState } from 'react'
 
 import { Alert, Container, Row, Col, FormControl, Badge } from 'react-bootstrap'
 import ReactMarkdown from 'react-markdown'
-import { Link } from 'react-router-dom'
 
 import { HOWTO_DEFAULT_VIEW_MODE, HOWTO_ITEM_TYPE_CATEGORY, HOWTO_ITEM_TYPE_HOWTO } from '../constants'
 import { Category } from '../models/Category'
@@ -39,6 +38,13 @@ export const HowToContainer: FC<HowToContainerProps> = ({
     const parsedUrl = parsePathAndSetContent(rootCategory, requestedPath)
 
     // Helper Methdos
+    const publishItemSelectEvent = (type: HowToItemType, path: string) => {
+        const itemSelectedEvent = events?.itemSelected
+        if (itemSelectedEvent) {
+            itemSelectedEvent(type, path)
+        }
+    }
+
     const showError = (errMsg: string | JSX.Element) => (
         <Container>
             <Alert key={1} variant="danger">
@@ -54,7 +60,9 @@ export const HowToContainer: FC<HowToContainerProps> = ({
                 Category <b>{beutifiedPath + ' '}</b>
                 not found in path.
                 <br />
-                <Link to="/howto">Go to root directory</Link>
+                <div onClick={() => publishItemSelectEvent(HOWTO_ITEM_TYPE_CATEGORY, '/howto')}>
+                    Go to root directory
+                </div>
             </div>
         )
     }
