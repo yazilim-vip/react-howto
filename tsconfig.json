@@ -1,8 +1,17 @@
 {
     "compilerOptions": {
-        "baseUrl": "./src/",
-        "outDir": "./dist",
+        "outDir": "./lib",
         "target": "es6",
+        "module": "esnext",
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "removeComments": true,
+        "declaration": false,
+        "sourceMap": true,
+        "jsx": "react",
+        "typeRoots": ["index.d.ts", "node_modules/@types"],
+
+
         "lib": ["dom", "dom.iterable", "esnext"],
         "allowJs": true,
         "skipLibCheck": true,
@@ -11,13 +20,11 @@
         "strict": true,
         "forceConsistentCasingInFileNames": true,
         "noFallthroughCasesInSwitch": true,
-        "module": "esnext",
         "moduleResolution": "node",
         "resolveJsonModule": true,
         "isolatedModules": true,
         "noEmit": true,
-        "jsx": "react"
     },
-    "include": ["src"],
+    "include": ["./src/**/*.tsx", "./src/**/*.ts"],
     "exclude": ["node_modules"]
 }

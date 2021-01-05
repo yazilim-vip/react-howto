@@ -5,16 +5,10 @@
   "author": "yazilim-vip",
   "license": "MIT",
   "repository": "yazilim-vip/react-howto",
-  "main": "dist/index.js",
-  "module": "dist/index.modern.js",
+  "main": "lib/index.js",
   "source": "src/index.tsx",
-  "types": "dist/index.d.ts",
-  "engines": {
-    "node": ">=10"
-  },
   "scripts": {
-    "build": "rollup -c",
-    "watch": "rollup -cw"
+    "build": "rm -rf ./lib && tsc"
   },
   "peerDependencies": {
     "react": "^16.13.1",
@@ -60,11 +54,6 @@
     "rollup-plugin-dts": "^2.0.1",
     "rollup-plugin-typescript": "^1.0.1",
     "rollup-watch": "^4.3.1",
-    "typescript": "^4.1.3",
-    "typings": "^2.1.1",
-    "underscore": "^1.11.0"
-  },
-  "files": [
-    "dist"
-  ]
+    "typescript": "^4.1.3"
+  }
 }

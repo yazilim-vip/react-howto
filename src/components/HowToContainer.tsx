@@ -2,11 +2,11 @@ import React, { FC, useState } from 'react'
 
 import { Alert, Container, Row, Col, FormControl, Badge } from 'react-bootstrap'
 import ReactMarkdown from 'react-markdown'
-import { HowToContainerProps, HowToItemType } from 'typings'
 
 import { HOWTO_DEFAULT_VIEW_MODE, HOWTO_ITEM_TYPE_CATEGORY, HOWTO_ITEM_TYPE_HOWTO } from '../constants'
 import { HowToItem } from '../models/HowToItem'
 import { SearchResult } from '../models/SearchResult'
+import { HowToContainerProps, HowToItemType } from '../types'
 import { createSearchIndex } from '../utils/createSearchIndex'
 import { parsePathAndSetContent } from '../utils/parsePathAndSetContent'
 import { searchArchive } from '../utils/searchArchive'
@@ -141,7 +141,7 @@ export const HowToContainer: FC<HowToContainerProps> = ({
                 <Alert key={1} variant="danger">
                     <b>Whopps {parsedUrl.selectedHowtoName}</b> not found in <b>{selectedCategory?.name}</b> folder.
                     <br />
-                    <Link to={parsedUrl.folderPath}>Go to {selectedCategory?.name} category</Link>
+                    {/* <Link to={parsedUrl.folderPath}>Go to {selectedCategory?.name} category</Link> */}
                 </Alert>
             )}
             {!searchResult && parsedUrl.howToFoundFlag ? (
