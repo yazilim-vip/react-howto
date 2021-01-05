@@ -3,14 +3,10 @@ import React, { FC } from 'react'
 import { faTh, faThList } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ButtonGroup, ToggleButton } from 'react-bootstrap'
+import { ViewModeChangerProps } from 'typings'
 
 import { HOWTO_VIEW_MODE_GRID_VIEW, HOWTO_VIEW_MODE_LIST_VIEW } from '../constants'
-import { FileManagerViewMode, HowToComponentProps } from '../types'
 import { TooltipElement } from './TooltipElement'
-
-export interface ViewModeChangerProps extends HowToComponentProps {
-    viewMode: FileManagerViewMode
-}
 
 export const ViewModeChanger: FC<ViewModeChangerProps> = ({ viewMode, events }: ViewModeChangerProps) => {
     const publishViewModeToggleEvent = () => {

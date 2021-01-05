@@ -1,4 +1,4 @@
-import { FileManagerViewMode } from './types'
+import { FileManagerViewMode } from 'typings'
 
 // FileManager
 export const HOWTO_VIEW_MODE_LIST_VIEW = 'list-view'

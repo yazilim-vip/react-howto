@@ -3,16 +3,11 @@ import React, { FC } from 'react'
 import { faFileAlt, faFolder } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ListGroup, Container, Col, Row } from 'react-bootstrap'
+import { FileManagerProps, HowToItemType } from 'typings'
 
 import { HOWTO_ITEM_TYPE_CATEGORY, HOWTO_VIEW_MODE_GRID_VIEW, HOWTO_VIEW_MODE_LIST_VIEW } from '../constants'
 import { HowToItem } from '../models/HowToItem'
-import { FileManagerViewMode, HowToComponentProps, HowToItemType } from '../types'
 import { TooltipElement } from './TooltipElement'
-export interface FileManagerProps extends HowToComponentProps {
-    viewMode: FileManagerViewMode
-    categoryList: Array<HowToItem> | null
-    howToList: Array<HowToItem> | null
-}
 
 export const FileManager: FC<FileManagerProps> = ({ viewMode, categoryList, howToList, events }: FileManagerProps) => {
     const publishItemSelectEvent = (type: HowToItemType, path: string) => {

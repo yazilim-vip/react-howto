@@ -3,13 +3,9 @@ import React, { FC } from 'react'
 import { faHome } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Breadcrumb } from 'react-bootstrap'
+import { PathBreadcrumbProps, HowToItemType } from 'typings'
 
 import { HOWTO_ITEM_TYPE_CATEGORY } from '../constants'
-import { HowToComponentProps, HowToItemType } from '../types'
-
-export interface PathBreadcrumbProps extends HowToComponentProps {
-    items: string[]
-}
 
 export const PathBreadcrumb: FC<PathBreadcrumbProps> = ({ items, events }: PathBreadcrumbProps) => {
     const publishItemSelectEvent = (type: HowToItemType, path: string) => {

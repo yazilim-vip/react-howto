@@ -1,4 +1,5 @@
 import css from 'rollup-plugin-css-only'
+import dts from 'rollup-plugin-dts'
 import typescript from 'rollup-plugin-typescript'
 
 import pkg from './package.json'
@@ -30,5 +31,10 @@ export default [
             sourcemap: true
         },
         plugins
+    },
+    {
+        input: './src/typings.d.ts',
+        output: [{ file: 'dist/index.d.ts', format: 'es' }],
+        plugins: [dts()]
     }
 ]

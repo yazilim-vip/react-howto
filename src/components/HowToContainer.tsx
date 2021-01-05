@@ -2,12 +2,11 @@ import React, { FC, useState } from 'react'
 
 import { Alert, Container, Row, Col, FormControl, Badge } from 'react-bootstrap'
 import ReactMarkdown from 'react-markdown'
+import { HowToContainerProps, HowToItemType } from 'typings'
 
 import { HOWTO_DEFAULT_VIEW_MODE, HOWTO_ITEM_TYPE_CATEGORY, HOWTO_ITEM_TYPE_HOWTO } from '../constants'
-import { Category } from '../models/Category'
 import { HowToItem } from '../models/HowToItem'
 import { SearchResult } from '../models/SearchResult'
-import { HowToComponentProps, FileManagerViewMode } from '../types'
 import { createSearchIndex } from '../utils/createSearchIndex'
 import { parsePathAndSetContent } from '../utils/parsePathAndSetContent'
 import { searchArchive } from '../utils/searchArchive'
@@ -16,12 +15,6 @@ import { PathBreadcrumb } from './PathBreadcrumb'
 import { ViewModeChanger } from './ViewModeChanger'
 
 import './HowToContainer.css'
-
-export interface HowToContainerProps extends HowToComponentProps {
-    rootCategory: Category
-    requestedPath: string
-    viewMode: FileManagerViewMode | undefined
-}
 
 export const HowToContainer: FC<HowToContainerProps> = ({
     rootCategory,

@@ -1,4 +1,4 @@
-import { HowToItemType } from '../types'
+import { HowToItemType } from 'typings'
 
 export interface HowToItem {
     path: string
