@@ -1,0 +1,30 @@
+/* add css module styles here (optional) */
+
+.link {
+    color: #353a3f;
+}
+
+.link:hover {
+    color: #646b73;
+}
+
+ol.breadcrumb {
+    margin: 0 !important;
+}
+
+.howto-sliding-pane {
+    height: 100vh !important;
+    margin-top: 0vh !important;
+}
+.howto-sliding-pane-overlay {
+    z-index: 999 !important;
+}
+
+.search-result-div {
+    padding: 12px 16px;
+}
+
+.file-manager-item:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}

@@ -8,7 +8,7 @@
   "main": "lib/index.js",
   "source": "src/index.tsx",
   "scripts": {
-    "build": "rm -rf ./lib && tsc"
+    "build": "rm -rf ./lib && tsc && cp src/components/HowToContainer.css lib/components/HowToContainer.css"
   },
   "peerDependencies": {
     "react": "^16.13.1",
