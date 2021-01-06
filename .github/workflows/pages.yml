@@ -18,6 +18,7 @@ jobs:
           yarn install
           yarn lib:build
           yarn showcase:build
+          cp build/index.html build/404.html
       - name: Publish Package
         run: yarn publish
         env:
