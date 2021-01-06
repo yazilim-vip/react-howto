@@ -1,4 +1,4 @@
-import { json2CategoryMapper } from '../library'
+import { json2CategoryMapper } from '../lib'
 
 const MOCK_DATA = {
     name: 'howto',

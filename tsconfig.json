@@ -22,13 +22,8 @@
         "isolatedModules": true,
         "noEmit": true
     },
-    "include": ["./src/library/*.tsx"],
+    // "include": ["./src/lib/*.tsx"],
     "exclude": [
-        "node_modules",
-        "./src/showcse/*.tsx",
-        "./src/index.tsx",
-        "./src/constants.tsx",
-        "./src/typings.d.ts",
-        "./src/react-app-env.d.ts"
+        "node_modules"
     ]
 }

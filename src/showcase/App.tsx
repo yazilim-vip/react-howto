@@ -6,7 +6,7 @@ import { far } from '@fortawesome/free-regular-svg-icons'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { Container } from 'react-bootstrap'
 
-import { HowToContainer, HOWTO_VIEW_MODE_GRID_VIEW } from '../library'
+import { HowToContainer, HOWTO_VIEW_MODE_GRID_VIEW } from '../lib'
 import { MOCK_CATEGORY } from './MockHowtoContent'
 
 // Fontaweome

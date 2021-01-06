@@ -11,7 +11,7 @@
     "private": true,
     "scripts": {
         "lint": "eslint --ext .jsx --ext .js --ext tsx --ext ts src/",
-        "lib:build": "rm -rf ./lib && tsc",
+        "lib:build": "tsc",
         "showcase:start": "react-scripts start",
         "showcase:build": "react-scripts build",
         "tsc": "tsc"
