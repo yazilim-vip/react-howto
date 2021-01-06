@@ -18,10 +18,10 @@ jobs:
           yarn install
           yarn lib:build
           yarn showcase:build
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish Package
         run: yarn publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: GH Pages Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
