@@ -8,7 +8,10 @@
   "main": "lib/index.js",
   "source": "src/index.tsx",
   "scripts": {
-    "build": "rm -rf ./lib && tsc && cp src/lib/components/HowToContainer.css lib/components/HowToContainer.css"
+    "lint": "eslint --ext .jsx --ext .js --ext tsx --ext ts src/",
+    "lib:build": "rm -rf ./lib && tsc && cp src/lib/components/HowToContainer.css lib/components/HowToContainer.css",
+    "showcase:start": "react-scripts start",
+    "showcase:build": "react-scripts build"
   },
   "peerDependencies": {
     "react": "^16.13.1",
