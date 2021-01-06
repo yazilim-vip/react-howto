@@ -1,5 +1,8 @@
 name: Build And Publish Node Module
 on:
+  release:
+    types:
+      - "published"
   push:
     branches:
       - "main"
@@ -18,10 +21,10 @@ jobs:
           yarn install
           yarn lib:build
           yarn showcase:build
+          echo "react-howto.yazilim.vip" > ./build/CNAME
           cp build/index.html build/404.html
       - name: Publish Package
         run: yarn publish
-        if: "!contains(github.event.head_commit.message, '[release]')"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: GH Pages Deploy
