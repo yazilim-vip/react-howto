@@ -28,6 +28,9 @@ const App: FC = () => {
                 events={{
                     itemSelectEventHandler: (type, link) => {
                         setRequestedPath(link)
+                    },
+                    viewModeToggleEventHandler: () => {
+                        console.log('hehe')
                     }
                 }}
             />

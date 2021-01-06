@@ -29,7 +29,6 @@ export const HowToContainer: FC<HowToContainerProps> = ({
 
     // constants
     const searchIndex = createSearchIndex(rootCategory)
-    const initialViewMode = viewMode || HOWTO_DEFAULT_VIEW_MODE
     const parsedUrl = parsePathAndSetContent(rootCategory, requestedPath)
 
     // events
@@ -38,6 +37,7 @@ export const HowToContainer: FC<HowToContainerProps> = ({
             events.viewModeToggleEventHandler()
         } else {
             const newViewMode = toggleFmViewMode(fmViewMode)
+            // console.log(fmViewMode)
             setFmViewMode(newViewMode)
         }
     }
@@ -125,7 +125,7 @@ export const HowToContainer: FC<HowToContainerProps> = ({
 
                         {!parsedUrl.howtoSelectedFlag && (
                             <ViewModeChanger
-                                viewMode={initialViewMode}
+                                viewMode={fmViewMode}
                                 viewModeToggleEventHandler={viewModeToggleEventHandler}
                             />
                         )}
@@ -162,7 +162,7 @@ export const HowToContainer: FC<HowToContainerProps> = ({
             ) : (
                 <FileManager
                     itemSelectedEventHandler={events.itemSelectEventHandler}
-                    viewMode={initialViewMode}
+                    viewMode={fmViewMode}
                     categoryList={searchResult ? searchResult.categoryHits : getFileMagnerCategoryItemList()}
                     howToList={searchResult ? searchResult.howtoHits : getFileMagnerHowToItemList()}
                 />
