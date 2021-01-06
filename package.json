@@ -11,7 +11,7 @@
     "private": true,
     "scripts": {
         "lint": "eslint --ext .jsx --ext .js --ext tsx --ext ts src/",
-        "lib:build": "rm -rf ./lib && tsc && cp src/lib/components/HowToContainer.css lib/components/HowToContainer.css",
+        "lib:build": "rm -rf ./lib && tsc && cp src/library/components/HowToContainer.css lib/components/HowToContainer.css",
         "showcase:start": "react-scripts start",
         "showcase:build": "react-scripts build"
     },
