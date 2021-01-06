@@ -4,7 +4,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
 import { fas } from '@fortawesome/free-solid-svg-icons'
-import { Container, Col, Row, Form } from 'react-bootstrap'
+import { Container, Col, Row } from 'react-bootstrap'
 import ReactJson from 'react-json-view'
 
 import { HowToContainer, HOWTO_VIEW_MODE_GRID_VIEW } from '../lib'
