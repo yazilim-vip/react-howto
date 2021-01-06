@@ -8,13 +8,10 @@ import { HOWTO_VIEW_MODE_GRID_VIEW, HOWTO_VIEW_MODE_LIST_VIEW } from '../constan
 import { ViewModeChangerProps } from '../types'
 import { TooltipElement } from './TooltipElement'
 
-export const ViewModeChanger: FC<ViewModeChangerProps> = ({ viewMode, events }: ViewModeChangerProps) => {
-    const publishViewModeToggleEvent = () => {
-        const event = events?.viewModeToggle
-        if (event) {
-            event()
-        }
-    }
+export const ViewModeChanger: FC<ViewModeChangerProps> = ({
+    viewMode,
+    viewModeToggleEventHandler
+}: ViewModeChangerProps) => {
     return (
         <ButtonGroup toggle className="float-right">
             <TooltipElement placement="bottom" tooltipElement="Grid View Mode">
@@ -24,7 +21,7 @@ export const ViewModeChanger: FC<ViewModeChangerProps> = ({ viewMode, events }: 
                     name="radio"
                     value={viewMode === HOWTO_VIEW_MODE_GRID_VIEW}
                     checked={viewMode === HOWTO_VIEW_MODE_GRID_VIEW}
-                    onChange={() => publishViewModeToggleEvent()}
+                    onChange={() => viewModeToggleEventHandler()}
                 >
                     <FontAwesomeIcon icon={faTh} />
                 </ToggleButton>
@@ -36,15 +33,11 @@ export const ViewModeChanger: FC<ViewModeChangerProps> = ({ viewMode, events }: 
                     name="radio"
                     value={viewMode === HOWTO_VIEW_MODE_LIST_VIEW}
                     checked={viewMode === HOWTO_VIEW_MODE_LIST_VIEW}
-                    onChange={() => publishViewModeToggleEvent()}
+                    onChange={() => viewModeToggleEventHandler()}
                 >
                     <FontAwesomeIcon icon={faThList} />
                 </ToggleButton>
             </TooltipElement>
         </ButtonGroup>
     )
-}
-
-ViewModeChanger.defaultProps = {
-    events: undefined
 }

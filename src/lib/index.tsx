@@ -5,7 +5,6 @@ export * from './constants'
 
 export * from './models/Category'
 export * from './models/HowTo'
-export * from './models/HowToEvent'
 export * from './models/HowToItem'
 export * from './models/ParsedContent'
 export * from './models/ParsedUrl'
