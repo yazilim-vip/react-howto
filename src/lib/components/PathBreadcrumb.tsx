@@ -16,6 +16,9 @@ export const PathBreadcrumb: FC<PathBreadcrumbProps> = ({ items, itemSelectEvent
         return (
             <Breadcrumb.Item
                 key={item}
+                linkProps={{
+                    class: 'link'
+                }}
                 active={index + 1 === items.length}
                 onClick={() => itemSelectEventHandler(HOWTO_ITEM_TYPE_CATEGORY, getLink(index + 1))}
             >
@@ -26,7 +29,13 @@ export const PathBreadcrumb: FC<PathBreadcrumbProps> = ({ items, itemSelectEvent
 
     return (
         <Breadcrumb>
-            <Breadcrumb.Item key="root" onClick={() => itemSelectEventHandler(HOWTO_ITEM_TYPE_CATEGORY, '/howto')}>
+            <Breadcrumb.Item
+                key="root"
+                linkProps={{
+                    class: 'link'
+                }}
+                onClick={() => itemSelectEventHandler(HOWTO_ITEM_TYPE_CATEGORY, '/howto')}
+            >
                 <span>
                     <FontAwesomeIcon icon={faHome} />
                 </span>
