@@ -8,7 +8,7 @@
   "main": "lib/index.js",
   "source": "src/lib/index.tsx",
   "scripts": {
-    "lint": "eslint --ext .jsx --ext .js --ext tsx --ext ts src/",
+    "lint": "eslint --ext .jsx --ext .js --ext tsx --ext ts src/ && cp src/lib/components/HowToContainer.css lib/components/HowToContainer.css",
     "lib:build": "rm -rf ./lib && tsc --project src/lib",
     "showcase:start": "react-scripts start",
     "showcase:build": "react-scripts build"

@@ -1,5 +1,5 @@
-name: Publish Node Module
-on: 
+name: Build And Publish Node Module
+on:
   push:
     tags:
       - "v*"
@@ -13,9 +13,17 @@ jobs:
         with:
           node-version: "12.x"
           registry-url: "https://npm.pkg.github.com/yazilim-vip"
-      - run: |
+        name: Build
+        run: |
           yarn install
-          yarn build
-          yarn publish
+          yarn lib:build
+          yarn showcase:build
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish Package
+        run: yarn publish
+      - name: GH Pages Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
