@@ -1,38 +1,34 @@
 {
-  "compilerOptions": {
-    "outDir": "./lib",
-    "target": "es6",
-    "module": "esnext",
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "removeComments": true,
-    "declaration": true,
-    "sourceMap": false,
-    "jsx": "react",
-    "typeRoots": [
-      "index.d.ts"
-    ],
-    "skipLibCheck": true,
-    "allowSyntheticDefaultImports": true,
-    "moduleResolution": "node",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "esModuleInterop": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true
-  },
-  "include": [
-    "./src/library/*.tsx",
-    "./src/library/*.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+    "compilerOptions": {
+        "outDir": "./lib",
+        "target": "es6",
+        "module": "esnext",
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "removeComments": true,
+        "declaration": true,
+        "sourceMap": false,
+        "jsx": "react",
+        "typeRoots": ["index.d.ts"],
+        "skipLibCheck": true,
+        "allowSyntheticDefaultImports": true,
+        "moduleResolution": "node",
+        "lib": ["dom", "dom.iterable", "esnext"],
+        "allowJs": true,
+        "esModuleInterop": true,
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "noEmit": true
+    },
+    "include": ["./src/library/*.tsx"],
+    "exclude": [
+        "node_modules",
+        "./src/showcse/*.tsx",
+        "./src/index.tsx",
+        "./src/constants.tsx",
+        "./src/typings.d.ts",
+        "./src/react-app-env.d.ts"
+    ]
 }

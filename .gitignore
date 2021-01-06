@@ -79,4 +79,4 @@ yarn.lock
 .npmrc
 .yarnrc
 
-lib
+/lib

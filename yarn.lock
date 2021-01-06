@@ -1949,11 +1949,6 @@
   resolved "https://registry.yarnpkg.com/@xtuc/long/-/long-4.2.2.tgz#d291c6a4e97989b5c61d9acf396ae4fe133a718d"
   integrity sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==
 
-"@yazilim-vip/react-howto@^0.0.7":
-  version "0.0.7"
-  resolved "https://npm.pkg.github.com/download/@yazilim-vip/react-howto/0.0.7/8d530b47c356cab9019ba93c22ef37ffd10467713c27323d94328bca2c1b61c9#10a3b7c7177c8db24b7735b806f317bc88815a1f"
-  integrity sha512-pzTSYec03ze7KQwrFrAsXLWWh432229Rkz7FcGS08GiDKLz1P9bAmfLaAsXC0JhXGDHOG7WmG0q5tIGCVGHz5g==
-
 abab@^2.0.0:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/abab/-/abab-2.0.5.tgz#c0b678fb32d60fc1219c784d6a826fe385aeb79a"

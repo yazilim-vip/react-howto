@@ -6,14 +6,15 @@
     "license": "MIT",
     "repository": "yazilim-vip/react-howto",
     "main": "lib/index.js",
-    "source": "src/lib/index.tsx",
+    "source": "src/library/index.tsx",
     "homepage": "http://www.yazilim.vip",
     "private": true,
     "scripts": {
         "lint": "eslint --ext .jsx --ext .js --ext tsx --ext ts src/",
-        "lib:build": "rm -rf ./lib && tsc && cp src/library/components/HowToContainer.css lib/components/HowToContainer.css",
+        "lib:build": "rm -rf ./lib && tsc",
         "showcase:start": "react-scripts start",
-        "showcase:build": "react-scripts build"
+        "showcase:build": "react-scripts build",
+        "tsc": "tsc"
     },
     "browserslist": {
         "production": [
