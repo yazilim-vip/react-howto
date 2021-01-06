@@ -1,30 +1,18 @@
 name: Publish Node Module
-on:
-  push:
-    tags:
-      - "v*"
+on: [push]
 jobs:
-  build_and_publish:
+  npm_publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      # Setup .npmrc file to publish to npm
       - uses: actions/setup-node@v1
         with:
           node-version: "12.x"
           registry-url: "https://npm.pkg.github.com/yazilim-vip"
       - run: |
           yarn install
-          yarn lib:build
-          yarn showcase:build
-        name: Build Library and Showcase
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: GH Pages Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
-      - run: yarn publish
-        name: Publish Packae
+          yarn build
+          yarn publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

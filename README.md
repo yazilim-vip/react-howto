@@ -1,1 +1,0 @@
-[Yazılım VIP Website](https://www.yazilim.vip)

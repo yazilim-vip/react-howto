@@ -6,15 +6,17 @@ import { ListGroup, Container, Col, Row } from 'react-bootstrap'
 
 import { HOWTO_ITEM_TYPE_CATEGORY, HOWTO_VIEW_MODE_GRID_VIEW, HOWTO_VIEW_MODE_LIST_VIEW } from '../constants'
 import { HowToItem } from '../models/HowToItem'
-import { FileManagerProps } from '../types'
+import { FileManagerProps, HowToItemType } from '../types'
 import { TooltipElement } from './TooltipElement'
 
-export const FileManager: FC<FileManagerProps> = ({
-    viewMode,
-    categoryList,
-    howToList,
-    itemSelectedEventHandler
-}: FileManagerProps) => {
+export const FileManager: FC<FileManagerProps> = ({ viewMode, categoryList, howToList, events }: FileManagerProps) => {
+    const publishItemSelectEvent = (type: HowToItemType, path: string) => {
+        const itemSelectedEvent = events?.itemSelected
+        if (itemSelectedEvent) {
+            itemSelectedEvent(type, path)
+        }
+    }
+
     const renderItems = (items: Array<HowToItem>) => {
         if (!items) {
             return null
@@ -35,7 +37,7 @@ export const FileManager: FC<FileManagerProps> = ({
                         className="file-manager-item"
                         key={link}
                         onClick={() => {
-                            itemSelectedEventHandler(howToItemType, link)
+                            publishItemSelectEvent(howToItemType, link)
                         }}
                     >
                         <ListGroup.Item>
@@ -47,11 +49,11 @@ export const FileManager: FC<FileManagerProps> = ({
             } else if (viewMode === HOWTO_VIEW_MODE_GRID_VIEW) {
                 return (
                     <Col xs={4} sm={3} md={3} lg={2} className="py-4 text-center" key={link}>
-                        <TooltipElement placement="bottom-end" tooltipElement={link.replace(/\//g, '>')}>
+                        <TooltipElement placement="bottom-end" tooltipElement={link}>
                             <div
                                 className="file-manager-item"
                                 onClick={() => {
-                                    itemSelectedEventHandler(howToItemType, link)
+                                    publishItemSelectEvent(howToItemType, link)
                                 }}
                             >
                                 <FontAwesomeIcon icon={icon} className="pb-1" size="4x" color={color} />
@@ -85,4 +87,8 @@ export const FileManager: FC<FileManagerProps> = ({
             )}
         </Container>
     )
+}
+
+FileManager.defaultProps = {
+    events: undefined
 }

@@ -7,42 +7,37 @@ import {
     HOWTO_VIEW_MODE_LIST_VIEW
 } from './constants'
 import { Category } from './models/Category'
+import { HowToEvent } from './models/HowToEvent'
 import { HowToItem } from './models/HowToItem'
 
 export type HowToItemType = typeof HOWTO_ITEM_TYPE_HOWTO | typeof HOWTO_ITEM_TYPE_CATEGORY
 export type FileManagerViewMode = typeof HOWTO_VIEW_MODE_LIST_VIEW | typeof HOWTO_VIEW_MODE_GRID_VIEW
 
-export type ViewModeToggleEvent = () => void
-export type ItemSelectedEvent = (type: HowToItemType, path: string) => void
+export type HowToComponentProps = {
+    events?: HowToEvent
+}
 
-export type FileManagerProps = {
+export type FileManagerProps = HowToComponentProps & {
     viewMode: FileManagerViewMode
     categoryList: Array<HowToItem> | null
     howToList: Array<HowToItem> | null
-    itemSelectedEventHandler: ItemSelectedEvent
 }
 
-export type HowToContainerProps = {
+export type HowToContainerProps = HowToComponentProps & {
     rootCategory: Category
     requestedPath: string
-    viewMode: FileManagerViewMode
-    events: {
-        itemSelectEventHandler: ItemSelectedEvent
-        viewModeToggleEventHandler?: ViewModeToggleEvent
-    }
+    viewMode: FileManagerViewMode | undefined
 }
-export type PathBreadcrumbProps = {
+export type PathBreadcrumbProps = HowToComponentProps & {
     items: string[]
-    itemSelectEventHandler: ItemSelectedEvent
 }
 
-export type TooltipElementProps = {
+export type TooltipElementProps = HowToComponentProps & {
     placement: Placement
     tooltipElement: React.ReactElement | string
     children: React.ReactElement
 }
 
-export type ViewModeChangerProps = {
+export type ViewModeChangerProps = HowToComponentProps & {
     viewMode: FileManagerViewMode
-    viewModeToggleEventHandler: ViewModeToggleEvent
 }
