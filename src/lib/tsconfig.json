@@ -1,0 +1,35 @@
+{
+    "compilerOptions": {
+        "outDir": "../../lib",
+        "target": "es6",
+        "module": "esnext",
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "removeComments": true,
+        "declaration": true,
+        "sourceMap": false,
+        "jsx": "react",
+        "typeRoots": [
+            "index.d.ts"
+        ],
+        // "lib": ["dom", "dom.iterable", "esnext"],
+        // "allowJs": true,
+        "skipLibCheck": true,
+        // "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        // "strict": true,
+        // "forceConsistentCasingInFileNames": true,
+        // "noFallthroughCasesInSwitch": true,
+        "moduleResolution": "node",
+        // "resolveJsonModule": true,
+        // "isolatedModules": true,
+        // "noEmit": true,
+    },
+    "include": [
+        "./*.tsx",
+        "./*.ts"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}

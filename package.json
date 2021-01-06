@@ -6,10 +6,10 @@
   "license": "MIT",
   "repository": "yazilim-vip/react-howto",
   "main": "lib/index.js",
-  "source": "src/index.tsx",
+  "source": "src/lib/index.tsx",
   "scripts": {
     "lint": "eslint --ext .jsx --ext .js --ext tsx --ext ts src/",
-    "lib:build": "rm -rf ./lib && tsc && cp src/lib/components/HowToContainer.css lib/components/HowToContainer.css",
+    "lib:build": "rm -rf ./lib && tsc --project src/lib",
     "showcase:start": "react-scripts start",
     "showcase:build": "react-scripts build"
   },
@@ -60,5 +60,17 @@
     "typescript": "^4.1.2",
     "underscore": "^1.11.0",
     "webfontloader": "^1.6.28"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

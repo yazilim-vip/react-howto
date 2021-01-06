@@ -1,5 +1,8 @@
 name: Publish Node Module
-on: [push]
+on: 
+  push:
+    tags:
+      - "v*"
 jobs:
   npm_publish:
     runs-on: ubuntu-latest
