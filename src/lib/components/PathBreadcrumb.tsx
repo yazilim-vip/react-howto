@@ -17,7 +17,7 @@ export const PathBreadcrumb: FC<PathBreadcrumbProps> = ({ items, itemSelectEvent
             <Breadcrumb.Item
                 key={item}
                 linkProps={{
-                    class: 'link'
+                    className: 'link'
                 }}
                 active={index + 1 === items.length}
                 onClick={() => itemSelectEventHandler(HOWTO_ITEM_TYPE_CATEGORY, getLink(index + 1))}
@@ -32,7 +32,7 @@ export const PathBreadcrumb: FC<PathBreadcrumbProps> = ({ items, itemSelectEvent
             <Breadcrumb.Item
                 key="root"
                 linkProps={{
-                    class: 'link'
+                    className: 'link'
                 }}
                 onClick={() => itemSelectEventHandler(HOWTO_ITEM_TYPE_CATEGORY, '/howto')}
             >
