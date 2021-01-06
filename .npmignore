@@ -4,3 +4,6 @@ src
 .eslintignore
 .editorconfig
 node_modules
+.github
+build
+tsconfig.json
