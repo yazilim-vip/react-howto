@@ -39,7 +39,7 @@ module.exports = {
                         position: 'before'
                     },
                     {
-                        pattern: 'yvip-website/**',
+                        pattern: 'howto/**',
                         group: 'internal',
                         position: 'after'
                     }

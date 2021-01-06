@@ -1,17 +1,28 @@
-export * from './components/HowToContainer'
+import React from 'react'
 
-export * from './types'
-export * from './constants'
+import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+import { PersistGate } from 'redux-persist/integration/react'
+import WebFont from 'webfontloader'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'react-sliding-pane/dist/react-sliding-pane.css'
 
-export * from './models/Category'
-export * from './models/HowTo'
-export * from './models/HowToEvent'
-export * from './models/HowToItem'
-export * from './models/ParsedContent'
-export * from './models/ParsedUrl'
-export * from './models/SearchResult'
+import App from './showcase/App'
+import { configureStore } from './showcase/redux/configureStore'
 
-export * from './utils/createSearchIndex'
-export * from './utils/json2CategoryMapper'
-export * from './utils/parsePathAndSetContent'
-export * from './utils/searchArchive'
+const { store, persistor } = configureStore()
+
+ReactDOM.render(
+    <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+            <App />
+        </PersistGate>
+    </Provider>,
+    document.getElementById('root')
+)
+
+WebFont.load({
+    google: {
+        families: ['Lato', 'Ubuntu']
+    }
+})
