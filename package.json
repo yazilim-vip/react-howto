@@ -7,6 +7,7 @@
   "repository": "yazilim-vip/react-howto",
   "main": "lib/index.js",
   "source": "src/lib/index.tsx",
+  "homepage": "http://react-howto.yazilim.vip",
   "scripts": {
     "lint": "eslint --ext .jsx --ext .js --ext tsx --ext ts src/ && cp src/lib/components/HowToContainer.css lib/components/HowToContainer.css",
     "lib:build": "rm -rf ./lib && tsc --project src/lib",
