@@ -29,8 +29,8 @@
     "noEmit": true
   },
   "include": [
-    "./src/lib/*.tsx",
-    "./src/lib/*.ts"
+    "./src/library/*.tsx",
+    "./src/library/*.ts"
   ],
   "exclude": [
     "node_modules"
