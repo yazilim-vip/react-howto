@@ -6,10 +6,11 @@ import ReactMarkdown from 'react-markdown'
 import { HOWTO_DEFAULT_VIEW_MODE, HOWTO_ITEM_TYPE_CATEGORY, HOWTO_ITEM_TYPE_HOWTO } from '../constants'
 import { HowToItem } from '../models/HowToItem'
 import { SearchResult } from '../models/SearchResult'
-import { HowToContainerProps, HowToItemType } from '../types'
+import { HowToContainerProps, FileManagerViewMode } from '../types'
 import { createSearchIndex } from '../utils/createSearchIndex'
 import { parsePathAndSetContent } from '../utils/parsePathAndSetContent'
 import { searchArchive } from '../utils/searchArchive'
+import { toggleFmViewMode } from '../utils/toggleFmViewMode'
 import { FileManager } from './FileManager'
 import { PathBreadcrumb } from './PathBreadcrumb'
 import { ViewModeChanger } from './ViewModeChanger'
@@ -22,22 +23,26 @@ export const HowToContainer: FC<HowToContainerProps> = ({
     viewMode,
     events
 }: HowToContainerProps) => {
-    // States
+    // states
     const [searchResult, setSearchResult] = useState<SearchResult | null>(null)
+    const [fmViewMode, setFmViewMode] = useState<FileManagerViewMode>(viewMode)
 
-    // Constants
+    // constants
     const searchIndex = createSearchIndex(rootCategory)
     const initialViewMode = viewMode || HOWTO_DEFAULT_VIEW_MODE
     const parsedUrl = parsePathAndSetContent(rootCategory, requestedPath)
 
-    // Helper Methdos
-    const publishItemSelectEvent = (type: HowToItemType, path: string) => {
-        const itemSelectedEvent = events?.itemSelected
-        if (itemSelectedEvent) {
-            itemSelectedEvent(type, path)
+    // events
+    const viewModeToggleEventHandler = () => {
+        if (events.viewModeToggleEventHandler) {
+            events.viewModeToggleEventHandler()
+        } else {
+            const newViewMode = toggleFmViewMode(fmViewMode)
+            setFmViewMode(newViewMode)
         }
     }
 
+    // helpers
     const showError = (errMsg: string | JSX.Element) => (
         <Container>
             <Alert key={1} variant="danger">
@@ -53,7 +58,7 @@ export const HowToContainer: FC<HowToContainerProps> = ({
                 Category <b>{beutifiedPath + ' '}</b>
                 not found in path.
                 <br />
-                <div onClick={() => publishItemSelectEvent(HOWTO_ITEM_TYPE_CATEGORY, '/howto')}>
+                <div onClick={() => events.itemSelectEventHandler(HOWTO_ITEM_TYPE_CATEGORY, '/howto')}>
                     Go to root directory
                 </div>
             </div>
@@ -101,7 +106,10 @@ export const HowToContainer: FC<HowToContainerProps> = ({
         <div>
             <Row>
                 <Col md="7">
-                    <PathBreadcrumb items={pathBreadcrumElements} events={events} />
+                    <PathBreadcrumb
+                        items={pathBreadcrumElements}
+                        itemSelectEventHandler={events.itemSelectEventHandler}
+                    />
                     {searchResult !== null && (
                         <div className="search-result-div">
                             <span className="mr-3">Search Result for :</span>
@@ -115,7 +123,12 @@ export const HowToContainer: FC<HowToContainerProps> = ({
                     <div className="d-flex bd-highlight mb-3">
                         <div className="ml-auto mr-4"></div>
 
-                        {!parsedUrl.howtoSelectedFlag && <ViewModeChanger viewMode={initialViewMode} events={events} />}
+                        {!parsedUrl.howtoSelectedFlag && (
+                            <ViewModeChanger
+                                viewMode={initialViewMode}
+                                viewModeToggleEventHandler={viewModeToggleEventHandler}
+                            />
+                        )}
                     </div>
                 </Col>
                 <Col md="3" sm="9">
@@ -148,7 +161,7 @@ export const HowToContainer: FC<HowToContainerProps> = ({
                 <ReactMarkdown source={parsedUrl?.parsedContent?.selectedHowto?.markdownContent} />
             ) : (
                 <FileManager
-                    events={events}
+                    itemSelectedEventHandler={events.itemSelectEventHandler}
                     viewMode={initialViewMode}
                     categoryList={searchResult ? searchResult.categoryHits : getFileMagnerCategoryItemList()}
                     howToList={searchResult ? searchResult.howtoHits : getFileMagnerHowToItemList()}
@@ -156,4 +169,8 @@ export const HowToContainer: FC<HowToContainerProps> = ({
             )}
         </div>
     )
+}
+
+HowToContainer.defaultProps = {
+    viewMode: HOWTO_DEFAULT_VIEW_MODE
 }

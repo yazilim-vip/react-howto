@@ -26,7 +26,7 @@ const App: FC = () => {
                 requestedPath={requestedPath}
                 viewMode={HOWTO_VIEW_MODE_GRID_VIEW}
                 events={{
-                    itemSelected: (type, link) => {
+                    itemSelectEventHandler: (type, link) => {
                         setRequestedPath(link)
                     }
                 }}
