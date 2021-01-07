@@ -10,7 +10,6 @@ import ReactMarkdown from 'react-markdown'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { materialOceanic } from 'react-syntax-highlighter/dist/cjs/styles/prism'
-import language from 'react-syntax-highlighter/dist/esm/languages/hljs/1c'
 
 import { HowToContainer, HOWTO_VIEW_MODE_GRID_VIEW } from '../lib'
 import { MOCK_CATEGORY } from './MockHowtoContent'
@@ -21,6 +20,7 @@ library.add(fas)
 library.add(far)
 
 type CodeBlockProps = { value: string; language: string }
+// eslint-disable-next-line react/prop-types
 const CodeBlock: FC<CodeBlockProps> = ({ value, language }) => (
     <SyntaxHighlighter style={materialOceanic} language={language}>
         {value}
