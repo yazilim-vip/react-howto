@@ -14,6 +14,7 @@ export type FileManagerViewMode = typeof HOWTO_VIEW_MODE_LIST_VIEW | typeof HOWT
 
 export type ViewModeToggleEvent = () => void
 export type ItemSelectedEvent = (type: HowToItemType, path: string) => void
+export type SearchEvent = (query: string) => void
 
 export type FileManagerProps = {
     viewMode: FileManagerViewMode
@@ -30,6 +31,7 @@ export type HowToContainerProps = {
     events: {
         itemSelectEventHandler: ItemSelectedEvent
         viewModeToggleEventHandler?: ViewModeToggleEvent
+        searchEventHandler?: SearchEvent
     }
 }
 export type PathBreadcrumbProps = {
