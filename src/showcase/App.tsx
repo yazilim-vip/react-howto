@@ -104,7 +104,7 @@ const App: FC = () => {
 
             <Navbar bg="dark" variant="dark" className="mt-auto">
                 <Nav className="d-flex align-items-center mx-auto justify-content-center">
-                    <Nav.Link as={Link} to="https://www.yazilim.vip">
+                    <Nav.Link href="https://www.yazilim.vip">
                         <FontAwesomeIcon icon={faCopyright} /> Yazilim VIP
                     </Nav.Link>
                 </Nav>
