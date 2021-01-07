@@ -57,7 +57,10 @@ export const FileManager: FC<FileManagerProps> = ({
                         const props = getProps(item.type)
                         return (
                             <Col xs={4} sm={3} md={3} lg={2} className="py-4 text-center" key={item.path}>
-                                <TooltipElement placement="bottom-end" tooltipElement={item.path.replace(/\//g, '>')}>
+                                <TooltipElement
+                                    placement="bottom-end"
+                                    tooltipElement={item.path.replace('/howto/', '').replace(/\//g, ' > ')}
+                                >
                                     <div
                                         className="file-manager-item"
                                         onClick={() => {
