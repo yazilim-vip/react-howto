@@ -17,8 +17,9 @@ export type ItemSelectedEvent = (type: HowToItemType, path: string) => void
 
 export type FileManagerProps = {
     viewMode: FileManagerViewMode
-    categoryList: Array<HowToItem> | null
-    howToList: Array<HowToItem> | null
+    categoryList?: HowToItem[]
+    howToList?: HowToItem[]
+    itemList?: HowToItem[]
     itemSelectedEventHandler: ItemSelectedEvent
 }
 

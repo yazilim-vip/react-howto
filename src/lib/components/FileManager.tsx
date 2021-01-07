@@ -1,86 +1,85 @@
 import React, { FC } from 'react'
 
-import { faFileAlt, faFolder } from '@fortawesome/free-solid-svg-icons'
+import { faFileAlt, faFolder, IconDefinition } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ListGroup, Container, Col, Row } from 'react-bootstrap'
 
 import { HOWTO_ITEM_TYPE_CATEGORY, HOWTO_VIEW_MODE_GRID_VIEW, HOWTO_VIEW_MODE_LIST_VIEW } from '../constants'
 import { HowToItem } from '../models/HowToItem'
-import { FileManagerProps } from '../types'
+import { FileManagerProps, HowToItemType } from '../types'
 import { TooltipElement } from './TooltipElement'
 
 export const FileManager: FC<FileManagerProps> = ({
     viewMode,
-    categoryList,
-    howToList,
+    itemList,
     itemSelectedEventHandler
 }: FileManagerProps) => {
-    const renderItems = (items: Array<HowToItem>) => {
-        if (!items) {
-            return null
-        }
-
-        return Object.keys(items).map((value: string, index: number) => {
-            const howToItem = items[index]
-            const howToItemType = howToItem.type
-
-            const icon = howToItemType === HOWTO_ITEM_TYPE_CATEGORY ? faFolder : faFileAlt
-            const color = howToItemType === HOWTO_ITEM_TYPE_CATEGORY ? '#50a4d4' : '#494d52'
-
-            const name = howToItem.name
-            const link = howToItem.path
-            if (viewMode === HOWTO_VIEW_MODE_LIST_VIEW) {
-                return (
-                    <div
-                        className="file-manager-item"
-                        key={link}
-                        onClick={() => {
-                            itemSelectedEventHandler(howToItemType, link)
-                        }}
-                    >
-                        <ListGroup.Item>
-                            <FontAwesomeIcon icon={icon} className="mr-3" color={color} />
-                            {name}
-                        </ListGroup.Item>
-                    </div>
-                )
-            } else if (viewMode === HOWTO_VIEW_MODE_GRID_VIEW) {
-                return (
-                    <Col xs={4} sm={3} md={3} lg={2} className="py-4 text-center" key={link}>
-                        <TooltipElement placement="bottom-end" tooltipElement={link.replace(/\//g, '>')}>
-                            <div
-                                className="file-manager-item"
-                                onClick={() => {
-                                    itemSelectedEventHandler(howToItemType, link)
-                                }}
-                            >
-                                <FontAwesomeIcon icon={icon} className="pb-1" size="4x" color={color} />
-                                <br />
-                                {name}
-                            </div>
-                        </TooltipElement>
-                    </Col>
-                )
-            } else {
-                return null
+    const getProps = (type: HowToItemType): { icon: IconDefinition; color: string } => {
+        if (type === HOWTO_ITEM_TYPE_CATEGORY) {
+            return {
+                icon: faFolder,
+                color: '#50a4d4'
             }
-        })
+        } else {
+            return {
+                icon: faFileAlt,
+                color: '#494d52'
+            }
+        }
     }
 
-    const categoryItems = (categoryList && renderItems(categoryList)) || undefined
-    const howToItems = (howToList && renderItems(howToList)) || undefined
     return (
         <Container fluid>
             {viewMode === HOWTO_VIEW_MODE_LIST_VIEW && (
                 <ListGroup>
-                    {categoryItems}
-                    {howToItems}
+                    {itemList?.map((item: HowToItem) => {
+                        const props = getProps(item.type)
+                        return (
+                            <div
+                                className="file-manager-item"
+                                key={item.path}
+                                onClick={() => {
+                                    itemSelectedEventHandler(item.type, item.path)
+                                }}
+                            >
+                                <ListGroup.Item>
+                                    <FontAwesomeIcon icon={props.icon} className="mr-3" color={props.color} />
+                                    {item.name}
+                                </ListGroup.Item>
+                            </div>
+                        )
+                    })}
                 </ListGroup>
             )}
             {viewMode === HOWTO_VIEW_MODE_GRID_VIEW && (
                 <Row>
-                    {categoryItems}
-                    {howToItems}
+                    {itemList?.map((item: HowToItem) => {
+                        const props = getProps(item.type)
+                        return (
+                            <Col xs={4} sm={3} md={3} lg={2} className="py-4 text-center" key={item.path}>
+                                <TooltipElement
+                                    placement="bottom"
+                                    tooltipElement={item.path.replace('/howto/', '').replace(/\//g, ' > ')}
+                                >
+                                    <div
+                                        className="file-manager-item"
+                                        onClick={() => {
+                                            itemSelectedEventHandler(item.type, item.path)
+                                        }}
+                                    >
+                                        <FontAwesomeIcon
+                                            icon={props.icon}
+                                            className="pb-1"
+                                            size="4x"
+                                            color={props.color}
+                                        />
+                                        <br />
+                                        {item.name}
+                                    </div>
+                                </TooltipElement>
+                            </Col>
+                        )
+                    })}
                 </Row>
             )}
         </Container>

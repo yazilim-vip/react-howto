@@ -1,13 +1,13 @@
 import React, { FC, useState } from 'react'
 
-import { Alert, Container, Row, Col, FormControl, Badge } from 'react-bootstrap'
+import { Alert, Row, Col, FormControl, Badge } from 'react-bootstrap'
 import ReactMarkdown from 'react-markdown'
 
-import { HOWTO_DEFAULT_VIEW_MODE, HOWTO_ITEM_TYPE_CATEGORY, HOWTO_ITEM_TYPE_HOWTO } from '../constants'
-import { HowToItem } from '../models/HowToItem'
+import { HOWTO_DEFAULT_VIEW_MODE, HOWTO_ITEM_TYPE_CATEGORY } from '../constants'
 import { SearchResult } from '../models/SearchResult'
 import { HowToContainerProps, FileManagerViewMode } from '../types'
 import { createSearchIndex } from '../utils/createSearchIndex'
+import { getFileManagerItemList } from '../utils/getFileManagerItemList'
 import { parsePathAndSetContent } from '../utils/parsePathAndSetContent'
 import { searchArchive } from '../utils/searchArchive'
 import { toggleFmViewMode } from '../utils/toggleFmViewMode'
@@ -30,6 +30,24 @@ export const HowToContainer: FC<HowToContainerProps> = ({
     // constants
     const searchIndex = createSearchIndex(rootCategory)
     const parsedUrl = parsePathAndSetContent(rootCategory, requestedPath)
+    if (!parsedUrl.categoryFoundFlag) {
+        const beutifiedPath = parsedUrl.folderPath.replace('/howto/', '')
+        return (
+            <div>
+                Category <b>{beutifiedPath + ' '}</b>
+                not found in path.
+                <br />
+                <div onClick={() => events.itemSelectEventHandler(HOWTO_ITEM_TYPE_CATEGORY, '/howto')}>
+                    Go to root directory
+                </div>
+            </div>
+        )
+    }
+    const selectedCategory = parsedUrl?.parsedContent?.selectedCategory
+    const pathBreadcrumbElements = parsedUrl?.categoryNames
+    if (parsedUrl?.selectedHowtoName) {
+        pathBreadcrumbElements.push(parsedUrl.selectedHowtoName)
+    }
 
     // events
     const viewModeToggleEventHandler = () => {
@@ -42,72 +60,12 @@ export const HowToContainer: FC<HowToContainerProps> = ({
         }
     }
 
-    // helpers
-    const showError = (errMsg: string | JSX.Element) => (
-        <Container>
-            <Alert key={1} variant="danger">
-                {errMsg}
-            </Alert>
-        </Container>
-    )
-
-    if (!parsedUrl.categoryFoundFlag) {
-        const beutifiedPath = parsedUrl.folderPath.replace('/howto/', '')
-        return showError(
-            <div>
-                Category <b>{beutifiedPath + ' '}</b>
-                not found in path.
-                <br />
-                <div onClick={() => events.itemSelectEventHandler(HOWTO_ITEM_TYPE_CATEGORY, '/howto')}>
-                    Go to root directory
-                </div>
-            </div>
-        )
-    }
-
-    const selectedCategory = parsedUrl?.parsedContent?.selectedCategory
-
-    //TODO: move them to util class
-    const getFileMagnerCategoryItemList = (): Array<HowToItem> => {
-        if (!selectedCategory) {
-            return []
-        }
-        const categoryList = selectedCategory.subCategoryList
-        return Object.keys(categoryList).map((catName) => {
-            const category = categoryList[catName]
-            return {
-                name: category.name,
-                path: `${parsedUrl.folderPath}/${category.name}`,
-                type: HOWTO_ITEM_TYPE_CATEGORY
-            }
-        })
-    }
-    const getFileMagnerHowToItemList = (): Array<HowToItem> => {
-        if (!selectedCategory) {
-            return []
-        }
-        const howToList = selectedCategory.howtoList
-        return Object.keys(howToList).map((howToName) => {
-            const howTo = howToList[howToName]
-            return {
-                name: howTo.label,
-                path: `${parsedUrl.folderPath}/${howTo.label}`,
-                type: HOWTO_ITEM_TYPE_HOWTO
-            }
-        })
-    }
-
-    const pathBreadcrumElements = parsedUrl.categoryNames
-    if (parsedUrl.selectedHowtoName) {
-        pathBreadcrumElements.push(parsedUrl.selectedHowtoName)
-    }
-
     return (
         <div>
             <Row>
                 <Col md="7">
                     <PathBreadcrumb
-                        items={pathBreadcrumElements}
+                        items={pathBreadcrumbElements}
                         itemSelectEventHandler={events.itemSelectEventHandler}
                     />
                     {searchResult !== null && (
@@ -163,8 +121,7 @@ export const HowToContainer: FC<HowToContainerProps> = ({
                 <FileManager
                     itemSelectedEventHandler={events.itemSelectEventHandler}
                     viewMode={fmViewMode}
-                    categoryList={searchResult ? searchResult.categoryHits : getFileMagnerCategoryItemList()}
-                    howToList={searchResult ? searchResult.howtoHits : getFileMagnerHowToItemList()}
+                    itemList={getFileManagerItemList(selectedCategory, parsedUrl.folderPath)}
                 />
             )}
         </div>
