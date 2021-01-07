@@ -28,8 +28,9 @@ export const  Example = () => (
     />
 )
 ```
-[Showcase](https://react-howto.yazilim.vip/showcase)
+
 ### Examples
+* [Showcase](https://react-howto.yazilim.vip/showcase)
 * [Yazilim VIP HowTo Archive:](https://howto.yazilim.vip) 
 
 ## License
