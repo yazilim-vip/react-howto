@@ -20,33 +20,17 @@ const App: FC = () => {
     const [requestedPath, setRequestedPath] = useState<string>('/howto')
     return (
         <Container fluid className="py-4 h-100">
-            <Row>
-                <Col md="8">
-                    <HowToContainer
-                        key={`${requestedPath}-${new Date()}`}
-                        rootCategory={MOCK_CATEGORY}
-                        requestedPath={requestedPath}
-                        viewMode={HOWTO_VIEW_MODE_GRID_VIEW}
-                        events={{
-                            itemSelectEventHandler: (type, link) => {
-                                setRequestedPath(link)
-                            }
-                        }}
-                    />
-                </Col>
-                <Col md="4">
-                    Example Data
-                    <hr />
-                    <div
-                        style={{
-                            height: '90vh',
-                            overflowY: 'scroll'
-                        }}
-                    >
-                        <ReactJson src={MOCK_CATEGORY} theme="monokai" name={false} />
-                    </div>
-                </Col>
-            </Row>
+            <HowToContainer
+                key={`${requestedPath}-${new Date()}`}
+                rootCategory={MOCK_CATEGORY}
+                requestedPath={requestedPath}
+                viewMode={HOWTO_VIEW_MODE_GRID_VIEW}
+                events={{
+                    itemSelectEventHandler: (type, link) => {
+                        setRequestedPath(link)
+                    }
+                }}
+            />
         </Container>
     )
 }
