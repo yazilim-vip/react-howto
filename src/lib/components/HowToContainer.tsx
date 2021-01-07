@@ -44,9 +44,9 @@ export const HowToContainer: FC<HowToContainerProps> = ({
         )
     }
     const selectedCategory = parsedUrl?.parsedContent?.selectedCategory
-    const pathBreadcrumElements = parsedUrl.categoryNames
+    const pathBreadcrumbElements = parsedUrl.categoryNames
     if (parsedUrl.selectedHowtoName) {
-        pathBreadcrumElements.push(parsedUrl.selectedHowtoName)
+        pathBreadcrumbElements.push(parsedUrl.selectedHowtoName)
     }
 
     // events
@@ -65,7 +65,7 @@ export const HowToContainer: FC<HowToContainerProps> = ({
             <Row>
                 <Col md="7">
                     <PathBreadcrumb
-                        items={pathBreadcrumElements}
+                        items={pathBreadcrumbElements}
                         itemSelectEventHandler={events.itemSelectEventHandler}
                     />
                     {searchResult !== null && (
