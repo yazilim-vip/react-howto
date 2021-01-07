@@ -48,7 +48,6 @@ export const HowToContainer: FC<HowToContainerProps> = ({
     if (parsedUrl.selectedHowtoName) {
         pathBreadcrumElements.push(parsedUrl.selectedHowtoName)
     }
-    const howToItemList = getFileManagerItemList(selectedCategory, parsedUrl.folderPath)
 
     // events
     const viewModeToggleEventHandler = () => {
@@ -122,8 +121,7 @@ export const HowToContainer: FC<HowToContainerProps> = ({
                 <FileManager
                     itemSelectedEventHandler={events.itemSelectEventHandler}
                     viewMode={fmViewMode}
-                    categoryList={searchResult ? searchResult.categoryHits : howToItemList.categoryItemList}
-                    howToList={searchResult ? searchResult.howtoHits : howToItemList.howToItemList}
+                    itemList={getFileManagerItemList(selectedCategory, parsedUrl.folderPath)}
                 />
             )}
         </div>

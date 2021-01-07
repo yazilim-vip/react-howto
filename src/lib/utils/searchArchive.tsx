@@ -5,18 +5,14 @@ import { SearchResult } from '../models/SearchResult'
 export const searchArchive = (searchIndex: HowToItem[], query: string): SearchResult => {
     if (!query) {
         return {
-            query: '',
-            categoryHits: null,
-            howtoHits: null
+            query: ''
         }
     }
 
     const hits = searchIndex.filter((o) => o.name.includes(query.toLowerCase()))
     if (!hits) {
         return {
-            query: query,
-            categoryHits: null,
-            howtoHits: null
+            query: query
         }
     }
 
