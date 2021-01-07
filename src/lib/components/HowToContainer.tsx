@@ -30,19 +30,6 @@ export const HowToContainer: FC<HowToContainerProps> = ({
     // constants
     const searchIndex = createSearchIndex(rootCategory)
     const parsedUrl = parsePathAndSetContent(rootCategory, requestedPath)
-    if (!parsedUrl.categoryFoundFlag) {
-        const beutifiedPath = parsedUrl.folderPath.replace('/howto/', '')
-        return (
-            <div>
-                Category <b>{beutifiedPath + ' '}</b>
-                not found in path.
-                <br />
-                <div onClick={() => events.itemSelectEventHandler(HOWTO_ITEM_TYPE_CATEGORY, '/howto')}>
-                    Go to root directory
-                </div>
-            </div>
-        )
-    }
     const selectedCategory = parsedUrl?.parsedContent?.selectedCategory
     const pathBreadcrumbElements = parsedUrl?.categoryNames
     if (parsedUrl?.selectedHowtoName) {
@@ -50,7 +37,7 @@ export const HowToContainer: FC<HowToContainerProps> = ({
     }
 
     // events
-    const viewModeToggleEventHandler = () => {
+    const handlerViewModeToggleEvent = () => {
         if (events.viewModeToggleEventHandler) {
             events.viewModeToggleEventHandler()
         } else {
@@ -58,6 +45,33 @@ export const HowToContainer: FC<HowToContainerProps> = ({
             // console.log(fmViewMode)
             setFmViewMode(newViewMode)
         }
+    }
+
+    const handlerSearchEvent = (query: string) => {
+        if (events.searchEventHandler) {
+            events.searchEventHandler(query)
+        } else {
+            if (query) {
+                const searchResult = searchArchive(searchIndex, query)
+                setSearchResult(searchResult)
+            } else {
+                setSearchResult(null)
+            }
+        }
+    }
+
+    // render ui
+    if (!parsedUrl.categoryFoundFlag) {
+        return (
+            <div>
+                Category <b>{parsedUrl.folderPath.replace('/howto/', '') + ' '}</b>
+                not found in path.
+                <br />
+                <div onClick={() => events.itemSelectEventHandler(HOWTO_ITEM_TYPE_CATEGORY, '/howto')}>
+                    Go to root directory
+                </div>
+            </div>
+        )
     }
 
     return (
@@ -84,7 +98,7 @@ export const HowToContainer: FC<HowToContainerProps> = ({
                         {!parsedUrl.howtoSelectedFlag && (
                             <ViewModeChanger
                                 viewMode={fmViewMode}
-                                viewModeToggleEventHandler={viewModeToggleEventHandler}
+                                viewModeToggleEventHandler={handlerViewModeToggleEvent}
                             />
                         )}
                     </div>
@@ -97,12 +111,7 @@ export const HowToContainer: FC<HowToContainerProps> = ({
                         value={searchResult ? searchResult.query : ''}
                         onChange={(event) => {
                             const searchQuery = event.target.value
-                            if (searchQuery) {
-                                const searchResult = searchArchive(searchIndex, searchQuery)
-                                setSearchResult(searchResult)
-                            } else {
-                                setSearchResult(null)
-                            }
+                            handlerSearchEvent(searchQuery)
                         }}
                     />
                 </Col>
