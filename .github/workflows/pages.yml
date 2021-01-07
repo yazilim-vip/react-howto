@@ -3,10 +3,16 @@ on:
   push:
     branches:
       - "main"
+  release:
+    types:
+      - "published"
 jobs:
   npm_publish:
     runs-on: ubuntu-latest
     steps:
+      - name: Print GitHub event action
+        run: |
+          echo "${{ github.event.action }}"
       - uses: actions/checkout@v2
       # Setup .npmrc file to publish to npm
       - uses: actions/setup-node@v1
