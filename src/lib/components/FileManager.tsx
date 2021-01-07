@@ -58,7 +58,7 @@ export const FileManager: FC<FileManagerProps> = ({
                         return (
                             <Col xs={4} sm={3} md={3} lg={2} className="py-4 text-center" key={item.path}>
                                 <TooltipElement
-                                    placement="bottom-end"
+                                    placement="bottom"
                                     tooltipElement={item.path.replace('/howto/', '').replace(/\//g, ' > ')}
                                 >
                                     <div
