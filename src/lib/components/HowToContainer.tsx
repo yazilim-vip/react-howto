@@ -44,8 +44,8 @@ export const HowToContainer: FC<HowToContainerProps> = ({
         )
     }
     const selectedCategory = parsedUrl?.parsedContent?.selectedCategory
-    const pathBreadcrumbElements = parsedUrl.categoryNames
-    if (parsedUrl.selectedHowtoName) {
+    const pathBreadcrumbElements = parsedUrl?.categoryNames
+    if (parsedUrl?.selectedHowtoName) {
         pathBreadcrumbElements.push(parsedUrl.selectedHowtoName)
     }
 
