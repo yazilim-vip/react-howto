@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab, faGithub } from '@fortawesome/free-brands-svg-icons'
@@ -6,9 +6,11 @@ import { faCopyright, far } from '@fortawesome/free-regular-svg-icons'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Container, Navbar, Nav, Jumbotron } from 'react-bootstrap'
+import ReactMarkdown from 'react-markdown'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { materialOceanic } from 'react-syntax-highlighter/dist/cjs/styles/prism'
+import language from 'react-syntax-highlighter/dist/esm/languages/hljs/1c'
 
 import { HowToContainer, HOWTO_VIEW_MODE_GRID_VIEW } from '../lib'
 import { MOCK_CATEGORY } from './MockHowtoContent'
@@ -17,6 +19,13 @@ import { MOCK_CATEGORY } from './MockHowtoContent'
 library.add(fab)
 library.add(fas)
 library.add(far)
+
+type CodeBlockProps = { value: string; language: string }
+const CodeBlock: FC<CodeBlockProps> = ({ value, language }) => (
+    <SyntaxHighlighter style={materialOceanic} language={language}>
+        {value}
+    </SyntaxHighlighter>
+)
 
 const Showcase: FC = () => {
     const [requestedPath, setRequestedPath] = useState<string>('/howto')
@@ -36,36 +45,23 @@ const Showcase: FC = () => {
 }
 
 const Home: FC = () => {
-    const syntexHighlightTheme = materialOceanic
-    const code = `
-import {Component } from 'react'
+    const [readme, setReadme] = useState<string | undefined>(undefined)
+    useEffect(() => {
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
+        const readmePath = require('./README.md')
+        fetch(readmePath)
+            .then((response) => {
+                return response.text()
+            })
+            .then((text) => {
+                setReadme(text)
+            })
+    })
 
-import MyComponent from 'emresensen'
-import 'emresensen/dist/index.css'
-
-class Example extends Component {
-    render() {
-        return <MyComponent />
-    }
-}    
-`
     return (
         <Container>
             <Jumbotron>
-                <h4>Installaton</h4>
-                Install with yarn
-                <SyntaxHighlighter language="bash" style={syntexHighlightTheme}>
-                    yarn add @yazilim-vip/react-howto
-                </SyntaxHighlighter>
-                Install with npm
-                <SyntaxHighlighter language="bash" style={syntexHighlightTheme}>
-                    npm install --save @yazilim-vip/react-howto
-                </SyntaxHighlighter>
-                <hr />
-                <h4>Usage</h4>
-                <SyntaxHighlighter language="typescript" style={syntexHighlightTheme}>
-                    {code}
-                </SyntaxHighlighter>
+                <ReactMarkdown source={readme} renderers={{ code: CodeBlock }} />
             </Jumbotron>
         </Container>
     )
@@ -89,7 +85,7 @@ const App: FC = () => {
                     </Nav.Link>
                 </Nav>
                 <Nav className="d-flex align-items-center">
-                    <Nav.Link as={Link} to="https://github.com/react-howto">
+                    <Nav.Link href="https://github.com/yazilim-vip/react-howto" target="_blank">
                         <FontAwesomeIcon icon={faGithub} size="2x" />
                     </Nav.Link>
                 </Nav>
