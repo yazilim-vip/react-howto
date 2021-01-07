@@ -1,7 +1,5 @@
 # react-howto
 
-<!-- [![NPM](https://img.shields.io/npm/v/emresensen.svg)](https://www.npmjs.com/package/emresensen) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) -->
-
 ## Install
 Install with yarn
 ```yarn
