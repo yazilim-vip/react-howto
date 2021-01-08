@@ -8,13 +8,13 @@ import { SearchResult } from '../models/SearchResult'
 import { HowToContainerProps, FileManagerViewMode } from '../types'
 import { createSearchIndex } from '../utils/createSearchIndex'
 import { getFileManagerItemList } from '../utils/getFileManagerItemList'
+import { getSearchResultItemList } from '../utils/getSearchResultItemList'
 import { parsePathAndSetContent } from '../utils/parsePathAndSetContent'
 import { searchArchive } from '../utils/searchArchive'
 import { toggleFmViewMode } from '../utils/toggleFmViewMode'
 import { FileManager } from './FileManager'
 import { PathBreadcrumb } from './PathBreadcrumb'
 import { ViewModeChanger } from './ViewModeChanger'
-
 import './HowToContainer.css'
 
 export const HowToContainer: FC<HowToContainerProps> = ({
@@ -24,7 +24,7 @@ export const HowToContainer: FC<HowToContainerProps> = ({
     events
 }: HowToContainerProps) => {
     // states
-    const [searchResult, setSearchResult] = useState<SearchResult | null>(null)
+    const [searchResult, setSearchResult] = useState<SearchResult | undefined>(undefined)
     const [fmViewMode, setFmViewMode] = useState<FileManagerViewMode>(viewMode)
 
     // constants
@@ -53,9 +53,10 @@ export const HowToContainer: FC<HowToContainerProps> = ({
         } else {
             if (query) {
                 const searchResult = searchArchive(searchIndex, query)
+                console.log(searchResult)
                 setSearchResult(searchResult)
             } else {
-                setSearchResult(null)
+                setSearchResult(undefined)
             }
         }
     }
@@ -82,7 +83,7 @@ export const HowToContainer: FC<HowToContainerProps> = ({
                         items={pathBreadcrumbElements}
                         itemSelectEventHandler={events.itemSelectEventHandler}
                     />
-                    {searchResult !== null && (
+                    {searchResult && (
                         <div className="search-result-div">
                             <span className="mr-3">Search Result for :</span>
                             <Badge pill variant="dark">
@@ -130,7 +131,11 @@ export const HowToContainer: FC<HowToContainerProps> = ({
                 <FileManager
                     itemSelectedEventHandler={events.itemSelectEventHandler}
                     viewMode={fmViewMode}
-                    itemList={getFileManagerItemList(selectedCategory, parsedUrl.folderPath)}
+                    itemList={
+                        searchResult
+                            ? getSearchResultItemList(searchResult)
+                            : getFileManagerItemList(selectedCategory, parsedUrl.folderPath)
+                    }
                 />
             )}
         </div>

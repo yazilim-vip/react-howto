@@ -56,6 +56,9 @@ const Home: FC = () => {
             .then((text) => {
                 setReadme(text)
             })
+            .catch((error) => {
+                console.log(error)
+            })
     })
 
     return (
