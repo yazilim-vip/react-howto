@@ -19,7 +19,7 @@ export const ViewModeChanger: FC<ViewModeChangerProps> = ({
                     type="radio"
                     variant="secondary"
                     name="radio"
-                    value={viewMode === HOWTO_VIEW_MODE_GRID_VIEW}
+                    value={viewMode === HOWTO_VIEW_MODE_GRID_VIEW ? 'true' : 'false'}
                     checked={viewMode === HOWTO_VIEW_MODE_GRID_VIEW}
                     onChange={() => viewModeToggleEventHandler()}
                 >
@@ -31,7 +31,7 @@ export const ViewModeChanger: FC<ViewModeChangerProps> = ({
                     type="radio"
                     variant="secondary"
                     name="radio"
-                    value={viewMode === HOWTO_VIEW_MODE_LIST_VIEW}
+                    value={viewMode === HOWTO_VIEW_MODE_LIST_VIEW ? 'true' : 'false'}
                     checked={viewMode === HOWTO_VIEW_MODE_LIST_VIEW}
                     onChange={() => viewModeToggleEventHandler()}
                 >

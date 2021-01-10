@@ -10,16 +10,15 @@ jobs:
   npm_publish:
     runs-on: ubuntu-latest
     steps:
-      - name: Print GitHub event action
-        run: echo "${{ github.event.action }}"
       - uses: actions/checkout@v2
-      # Setup .npmrc file to publish to npm
       - uses: actions/setup-node@v1
         with:
           node-version: "12.x"
           registry-url: "https://npm.pkg.github.com/yazilim-vip"
       - name: Build
         run: |
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
+          echo "@yazilim-vip:registry=https://npm.pkg.github.com" >> .npmrc
           yarn install
           yarn lib:build
           yarn showcase:build
