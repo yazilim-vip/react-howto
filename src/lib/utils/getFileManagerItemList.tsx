@@ -1,5 +1,6 @@
+import { Category } from '@yazilim-vip/howto-script'
+
 import { HOWTO_ITEM_TYPE_CATEGORY, HOWTO_ITEM_TYPE_HOWTO } from '../constants'
-import { Category } from '../models/Category'
 import { HowToItem } from '../models/HowToItem'
 
 export const getFileManagerItemList = (selectedCategory: Category | undefined, folderPath: string): HowToItem[] => {

@@ -1,6 +1,6 @@
+import { Category } from '@yazilim-vip/howto-script'
 import _ from 'underscore'
 
-import { Category } from '../models/Category'
 import { ParsedContent } from '../models/ParsedContent'
 import { ParsedUrl } from '../models/ParsedUrl'
 

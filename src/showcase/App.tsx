@@ -5,6 +5,7 @@ import { fab, faGithub } from '@fortawesome/free-brands-svg-icons'
 import { faCopyright, far } from '@fortawesome/free-regular-svg-icons'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { MOCK_CATEGORY } from '@yazilim-vip/howto-script/build/mockCategory'
 import { Container, Navbar, Nav, Jumbotron } from 'react-bootstrap'
 import ReactMarkdown from 'react-markdown'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
@@ -12,7 +13,6 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { materialOceanic } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 
 import { HowToContainer, HOWTO_VIEW_MODE_GRID_VIEW } from '../lib'
-import { MOCK_CATEGORY } from './MockHowtoContent'
 
 // Fontaweome
 library.add(fab)
