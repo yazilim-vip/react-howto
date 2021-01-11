@@ -42,7 +42,6 @@ export const HowToContainer: FC<HowToContainerProps> = ({
             events.viewModeToggleEventHandler()
         } else {
             const newViewMode = toggleFmViewMode(fmViewMode)
-            // console.log(fmViewMode)
             setFmViewMode(newViewMode)
         }
     }
@@ -53,7 +52,6 @@ export const HowToContainer: FC<HowToContainerProps> = ({
         } else {
             if (query) {
                 const searchResult = searchArchive(searchIndex, query)
-                console.log(searchResult)
                 setSearchResult(searchResult)
             } else {
                 setSearchResult(undefined)
